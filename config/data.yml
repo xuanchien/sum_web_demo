@@ -1,0 +1,7 @@
+development:
+  gold_folder: "/Users/chientran/Documents/jaist/test/data/gold"
+  system_folder: "/Users/chientran/Documents/jaist/test/data/models"
+
+production:
+  gold_folder: "/Users/chientran/Documents/jaist/test/data/gold"
+  system_folder: "/Users/chientran/Documents/jaist/test/data/models"

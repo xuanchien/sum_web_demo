@@ -1,0 +1,52 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+html, body, #container{
+	height: 100%;
+}
+#body-container, #app-root{
+	display: flex;
+	flex: 1;
+}
+#header{
+	padding: 10px;
+	background-color: #3498db;
+	color: #fff;
+}
+#doc-list-section{
+	flex: 0 0 240px;
+	overflow-y: scroll;
+	background-color: #95a5a6;
+	color: #fff;
+	ul#doc-list{
+		list-style: none;
+		padding-left: 0px;
+		li > a{
+			display: block;
+			padding: 10px;
+			color: white;
+			padding: 10px;
+			text-decoration: none;
+			&:hover{
+				text-decoration: none;
+				background-color: #7f8c8d;
+			}
+		}
+	}
+}
+#main-content-section{
+	flex: 1 1;
+	padding: 10px;
+	overflow-y: scroll;
+}
+#container {
+	display: flex;
+	flex-direction: column;
+}
+#system-list{
+	display: inline-block;
+	width: 100px;
+}
+.summary-content{
+	white-space: pre-line;
+}
