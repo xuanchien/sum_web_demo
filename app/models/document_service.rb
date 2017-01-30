@@ -13,6 +13,7 @@ class DocumentService
 		files = Dir.glob(File.join(@doc_folder, "*.summary"))
 
 		files.each do |file|
+			puts file
 			body, summary = read_article_file_content(file)
 			docs << Document.new(file, body, summary)
 		end
@@ -25,7 +26,7 @@ class DocumentService
 		summary = ""
 
 		content = File.open(file_path, "r").read()
-		_, body, summary, _ = content.split("\n\n")
+		_, body, summary, _ = content.force_encoding("iso-8859-1").split("\n\n")
 		body = body.gsub(/\t\t\t\d/, "")
 
 		[body, summary]
