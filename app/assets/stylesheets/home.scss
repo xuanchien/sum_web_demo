@@ -14,22 +14,31 @@ html, body, #container{
 	color: #fff;
 }
 #doc-list-section{
-	flex: 0 0 240px;
+	flex: 0 0 350px;
 	overflow-y: scroll;
 	background-color: #95a5a6;
 	color: #fff;
 	ul#doc-list{
 		list-style: none;
 		padding-left: 0px;
-		li > a{
-			display: block;
-			padding: 10px;
-			color: white;
-			padding: 10px;
-			text-decoration: none;
-			&:hover{
+
+		li {
+			&.selected{
+				background-color: #2c3e50;
+			}
+			a {
+				display: block;
+				padding: 10px;
+				color: white;
+				padding: 10px;
 				text-decoration: none;
-				background-color: #7f8c8d;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				&:hover{
+					text-decoration: none;
+					background-color: #7f8c8d;
+				}
 			}
 		}
 	}

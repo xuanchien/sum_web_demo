@@ -13,15 +13,33 @@ define(['backbone.marionette',
 		childViewEvents: {
 			'child:click': 'showDocumentContent'
 		},
+		events: {
+			'scroll #doc-list-section': 'scrollNow',
+			'click #doc-list-section': 'scrollNow'
+		},
 		onRender: function(){
-			this.showChildView('docList', new DocumentListView());
+			this.documentListView = new DocumentListView();
+			this.showChildView('docList', this.documentListView);
 			this.showChildView('mainContent', new EmptyDocumentContentView());
+		},
+		onDomRefresh: function(){
+			var self = this;
+			$("#doc-list-section").on('scroll', function(){
+				self.scroll();
+			});
 		},
 		showDocumentContent: function(childView){
 			var documentContentView = new DocumentContentView({
 				model: childView.model
 			});
 			this.showChildView('mainContent', documentContentView);
+		},
+		scroll: function(event){
+			var docListRegion = this.getRegion('docList');
+			var el = docListRegion.$el;
+			if (el.scrollTop() + el.innerHeight() >= el[0].scrollHeight){
+				this.documentListView.loadMore();
+			}
 		}
 	})
 })

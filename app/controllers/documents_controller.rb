@@ -1,6 +1,8 @@
 class DocumentsController < ApplicationController
   def index
-  	@docs = document_service.get_documents
+  	page = params[:page].to_i || 1
+  	per_page = params[:per_page].to_i || 20
+  	@docs = document_service.get_documents(page, per_page)
   end
 
   def show

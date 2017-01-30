@@ -8,11 +8,11 @@ class DocumentService
 		@systems_folder = @config["system_folder"]
 	end
 
-	def get_documents
+	def get_documents(page, per_page)
 		docs = []
 		files = Dir.glob(File.join(@doc_folder, "*.summary"))
 
-		files.each do |file|
+		files[page, page+per_page].each do |file|
 			puts file
 			body, summary = read_article_file_content(file)
 			docs << Document.new(file, body, summary)
