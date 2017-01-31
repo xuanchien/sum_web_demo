@@ -1,10 +1,32 @@
-define(['backbone.marionette', 'public/views/root_view'], function(Marionette, RootView){
+define(['jquery',
+	'bootstrap-sprockets',
+	'backbone.marionette',
+	'public/views/root_view',
+	'public/models/document'
+	],
+	function(jQuery, Bootstrap, Marionette, RootView, Document){
+	var rootView = new RootView();
+
+	var Controller = Marionette.Object.extend({
+		showDoc: function(id){
+			var d = new Document({id: id});
+			d.fetch().done(function(){
+				rootView.viewDocumentModel(d);
+			})
+		}
+	})
+	var Router = Marionette.AppRouter.extend({
+		controller: new Controller(),
+		appRoutes: {
+			'doc/:id': 'showDoc'
+		}
+	})
 	var SummarizationDemoApp = Marionette.Application.extend({
 		region: '#app-root',
 		template: JST['layout'],
 		onStart: function(){
-			console.log("start");
-			this.showView(new RootView());
+			var router = new Router();
+			this.showView(rootView);
 			Backbone.history.start();
 		}
 	})
@@ -12,6 +34,3 @@ define(['backbone.marionette', 'public/views/root_view'], function(Marionette, R
 	var app = new SummarizationDemoApp();
 	app.start();
 })
-// Marionette = require('backbone.marionette');
-// RootView = require('public/views/root_view');
-

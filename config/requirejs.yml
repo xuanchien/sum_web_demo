@@ -1,0 +1,5 @@
+shim :
+  'bootstrap' :
+    deps : ['jquery']
+paths :
+  'bootstrap' : 'bootstrap-sprockets'

@@ -8,9 +8,18 @@ class DocumentService
 		@systems_folder = @config["system_folder"]
 	end
 
-	def get_documents(page, per_page)
+	def get_documents(page, per_page, query)
 		docs = []
 		files = Dir.glob(File.join(@doc_folder, "*.summary"))
+
+		if query
+			puts query
+			files = files.select{|x| x.split("/").last.include?(query)}
+			puts files
+		end
+
+		puts page
+		puts per_page
 
 		files[page, page+per_page].each do |file|
 			puts file

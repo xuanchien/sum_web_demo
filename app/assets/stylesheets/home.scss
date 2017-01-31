@@ -13,8 +13,14 @@ html, body, #container{
 	background-color: #3498db;
 	color: #fff;
 }
+#sidebar{
+	flex: 0 0 300px;
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+}
 #doc-list-section{
-	flex: 0 0 350px;
+	flex: 1;
 	overflow-y: scroll;
 	background-color: #95a5a6;
 	color: #fff;

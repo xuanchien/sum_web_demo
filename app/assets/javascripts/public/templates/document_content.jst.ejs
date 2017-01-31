@@ -1,4 +1,19 @@
 <h2><%= id %></h2>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<a href='javascript:void(0)' data-toggle='collapse' data-target='#article'>Original article (Click to toggle)</a>
+		</h4>
+	</div>
+	<div class="panel-collapse collapse" id='article'>
+		<div class="panel-body">
+			<p class="summary-content">
+				<%= content %>
+			</p>
+		</div>
+	</div>
+</div>
+
 <div id="gold-summary-section">
 </div>
 <hr />

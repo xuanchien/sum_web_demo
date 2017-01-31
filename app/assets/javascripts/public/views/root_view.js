@@ -1,8 +1,9 @@
-define(['backbone.marionette',
+define(['backbone',
+	'backbone.marionette',
 	'public/views/document_list_view',
 	'public/views/empty_document_content_view',
 	'public/views/document_content_view'],
-	function(Marionette, DocumentListView, EmptyDocumentContentView, DocumentContentView){
+	function(Backbone, Marionette, DocumentListView, EmptyDocumentContentView, DocumentContentView){
 	return Marionette.View.extend({
 		template: JST['public/templates/layout'],
 		regions: {
@@ -14,7 +15,7 @@ define(['backbone.marionette',
 			'child:click': 'showDocumentContent'
 		},
 		events: {
-			'scroll #doc-list-section': 'scrollNow',
+			'keyup #search-bar': 'searchFile',
 			'click #doc-list-section': 'scrollNow'
 		},
 		onRender: function(){
@@ -29,10 +30,14 @@ define(['backbone.marionette',
 			});
 		},
 		showDocumentContent: function(childView){
+			this.viewDocumentModel(childView.model);
+		},
+		viewDocumentModel: function(model){
 			var documentContentView = new DocumentContentView({
-				model: childView.model
+				model: model
 			});
 			this.showChildView('mainContent', documentContentView);
+			Backbone.history.navigate('/doc/' + model.id);
 		},
 		scroll: function(event){
 			var docListRegion = this.getRegion('docList');
@@ -40,6 +45,14 @@ define(['backbone.marionette',
 			if (el.scrollTop() + el.innerHeight() >= el[0].scrollHeight){
 				this.documentListView.loadMore();
 			}
+		},
+		searchFile: function(event){
+			var self = this;
+			var query = this.$el.find("#search-bar").val();
+			clearTimeout(this.searchKeyTimeoutHandler);
+			this.searchKeyTimeoutHandler = setTimeout(function(){
+				self.documentListView.searchFile(query);
+			}, 400);
 		}
 	})
 })

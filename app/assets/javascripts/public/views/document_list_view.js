@@ -29,6 +29,16 @@ define(['backbone.marionette',
 		onChildClick: function(childView){
 			this.$el.find('li').removeClass('selected');
 			childView.$el.addClass('selected');
+		},
+		searchFile: function(query){
+			this.page = 0;
+			this.collection.fetch({
+				update: true,
+				remove: true,
+				data: {
+					query: query
+				}
+			})
 		}
 	})
 })
