@@ -13,16 +13,10 @@ class DocumentService
 		files = Dir.glob(File.join(@doc_folder, "*.summary"))
 
 		if query
-			puts query
 			files = files.select{|x| x.split("/").last.include?(query)}
-			puts files
 		end
 
-		puts page
-		puts per_page
-
 		files[page, page+per_page].each do |file|
-			puts file
 			body, summary = read_article_file_content(file)
 			docs << Document.new(file, body, summary)
 		end
