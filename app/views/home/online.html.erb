@@ -1,0 +1,24 @@
+<textarea placeholder="Enter news content here" id='input-doc' rows="10"></textarea>
+<button id='summarize-btn'>Summarize</button>
+<span id="waiting-text" style="display: none">Waiting...</span>
+<hr />
+<div id="result">
+	<h3>Result</h3>
+	<div id="result-content"></div>
+</div>
+
+<script>
+	$("#summarize-btn").click(function(){
+		var text = $("#input-doc").val();
+		$("#waiting-text").show();
+		$.ajax({
+			url: "/summarize",
+			data: {text: text},
+			type: "POST",
+			success: function(response){
+				$("#result-content").html(response);
+				$("#waiting-text").hide();
+			}
+		})
+	})
+</script>

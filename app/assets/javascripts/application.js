@@ -11,5 +11,3 @@
 // about supported directives.
 //
 //= require jquery
-//= require_tree ./public/templates
-//= require ./public/app
